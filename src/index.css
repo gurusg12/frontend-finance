@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+@layer components {
+  /* ── Buttons ─────────────────────────────── */
+  .btn { @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-150 cursor-pointer border-0 outline-none select-none; }
+  .btn:disabled { @apply opacity-50 cursor-not-allowed pointer-events-none; }
+  .btn-primary  { @apply bg-blue-600 text-white hover:bg-blue-700 active:scale-95 shadow-sm; }
+  .btn-success  { @apply bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95 shadow-sm; }
+  .btn-danger   { @apply bg-red-500 text-white hover:bg-red-600 active:scale-95 shadow-sm; }
+  .btn-warning  { @apply bg-amber-500 text-white hover:bg-amber-600 active:scale-95 shadow-sm; }
+  .btn-secondary{ @apply bg-slate-200 text-slate-700 hover:bg-slate-300 active:scale-95; }
+  .btn-outline  { @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-400 active:scale-95; }
+  .btn-ghost    { @apply bg-transparent text-slate-600 hover:bg-slate-100 active:scale-95; }
+  .btn-sm       { @apply px-2.5 py-1.5 text-xs rounded-md; }
+  .btn-lg       { @apply px-6 py-3 text-base rounded-xl; }
+
+  /* ── Cards ───────────────────────────────── */
+  .card         { @apply bg-white rounded-2xl shadow-sm border border-slate-100 p-5; }
+  .card-title   { @apply text-base font-bold text-slate-800 mb-4; }
+
+  /* ── Form controls ───────────────────────── */
+  .input        { @apply w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm outline-none transition-all bg-white text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100; }
+  .input-sm     { @apply px-2.5 py-1.5 text-xs rounded-md; }
+  .select       { @apply w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm outline-none transition-all bg-white text-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-100; }
+  .label        { @apply block text-xs font-semibold text-slate-600 mb-1.5; }
+  .field        { @apply space-y-1; }
+
+  /* ── Tables ──────────────────────────────── */
+  .table-wrap   { @apply overflow-x-auto rounded-xl border border-slate-200; }
+  .table        { @apply w-full text-sm border-collapse; }
+  .table thead  { @apply sticky top-0 z-10; }
+  .table th     { @apply bg-slate-50 text-slate-500 font-semibold px-4 py-3 text-left whitespace-nowrap border-b border-slate-200 text-xs uppercase tracking-wide; }
+  .table td     { @apply px-4 py-3 border-b border-slate-100 text-slate-700 align-middle; }
+  .table tr:last-child td { @apply border-b-0; }
+  .table tbody tr:hover td { @apply bg-blue-50/40; }
+
+  /* ── Badges ──────────────────────────────── */
+  .badge        { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold; }
+  .badge-blue   { @apply bg-blue-100 text-blue-700; }
+  .badge-green  { @apply bg-emerald-100 text-emerald-700; }
+  .badge-red    { @apply bg-red-100 text-red-600; }
+  .badge-amber  { @apply bg-amber-100 text-amber-700; }
+  .badge-slate  { @apply bg-slate-100 text-slate-600; }
+  .badge-purple { @apply bg-purple-100 text-purple-700; }
+  .badge-orange { @apply bg-orange-100 text-orange-700; }
+
+  /* ── Modals ──────────────────────────────── */
+  .modal-backdrop { @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4; }
+  .modal-box      { @apply bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[92vh] overflow-y-auto; }
+  .modal-header   { @apply flex items-center justify-between px-5 py-4 border-b border-slate-100; }
+  .modal-body     { @apply px-5 py-4; }
+  .modal-footer   { @apply flex gap-3 justify-end px-5 py-4 border-t border-slate-100 bg-slate-50 rounded-b-2xl; }
+
+  /* ── Sidebar links ───────────────────────── */
+  .sidebar-link       { @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300/90 hover:bg-white/10 hover:text-white transition-all text-sm font-medium cursor-pointer w-full text-left border-0 bg-transparent; }
+  .sidebar-link.active{ @apply bg-blue-600/25 text-blue-300 font-semibold; }
+  .sidebar-group-label{ @apply text-[10px] font-bold uppercase tracking-widest text-slate-500 px-3 pt-4 pb-1.5; }
+
+  /* ── Stat cards ──────────────────────────── */
+  .stat-card    { @apply bg-white rounded-2xl p-4 border border-slate-100 shadow-sm; }
+  .stat-value   { @apply text-2xl font-bold text-slate-800; }
+  .stat-label   { @apply text-xs font-semibold text-slate-500 uppercase tracking-wide mt-0.5; }
+}
+
+/* Side-by-side report layout (balance sheet, P&L, receipts & payments) — same on phone and PC */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+
+/* Print — the report is copied into #print-root by utils/print.js */
+#print-root { display: none; }
+@page { margin: 12mm 11mm 16mm; @bottom-right { content: "Page " counter(page) " of " counter(pages); font-size: 8pt; color: #6b7280; } }
+
+@media print {
+  html, body { background: #fff !important; height: auto !important; overflow: visible !important; }
+  #root, .no-print { display: none !important; }
+
+  #print-root { display: block !important; color: #111827; font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif; font-size: 10pt; line-height: 1.35; }
+  #print-root, #print-root * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-shadow: none !important; border-radius: 0 !important; }
+  #print-root .fas, #print-root .far, #print-root .fa { display: none !important; }
+
+  /* header */
+  #print-root .pr-head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2.2pt solid #111827; padding-bottom: 6px; margin-bottom: 12px; }
+  #print-root .pr-org   { font-size: 15pt; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
+  #print-root .pr-title { font-size: 11.5pt; font-weight: 700; color: #374151; margin-top: 2px; }
+  #print-root .pr-meta  { text-align: right; font-size: 8.5pt; color: #4b5563; line-height: 1.55; }
+  #print-root .pr-body  { padding: 0 !important; border: 0 !important; }
+
+  /* tables */
+  #print-root table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 0 0 8px; }
+  #print-root thead { display: table-header-group; }
+  #print-root tfoot { display: table-footer-group; }
+  #print-root tr { page-break-inside: avoid; break-inside: avoid; background: transparent !important; }
+  #print-root th { background: #e5e7eb !important; color: #111827 !important; border: .6pt solid #6b7280 !important; padding: 4px 6px !important; font-size: 8pt; text-transform: uppercase; letter-spacing: .03em; }
+  #print-root td { border: .4pt solid #9ca3af !important; padding: 3px 6px !important; color: #111827; background: transparent !important; }
+  #print-root tr.bg-slate-100 td { background: #f3f4f6 !important; font-weight: 700; }
+  #print-root tfoot td, #print-root tr.bg-blue-100 td { background: #e5e7eb !important; font-weight: 700; border-top: 1pt solid #111827 !important; }
+  #print-root .font-mono { font-family: 'Consolas', 'Courier New', monospace; }
+  #print-root .text-right { text-align: right; }
+
+  /* coloured title bars → solid dark bars with white text */
+  #print-root .bg-emerald-600, #print-root .bg-emerald-700, #print-root .bg-red-500, #print-root .bg-amber-600,
+  #print-root .bg-slate-700, #print-root .bg-slate-800, #print-root .bg-blue-700, #print-root .bg-indigo-600 {
+    background: #1f2937 !important; color: #fff !important; padding: 5px 8px !important; font-size: 9.5pt;
+  }
+  /* soft summary strips */
+  #print-root .bg-emerald-50, #print-root .bg-red-50, #print-root .bg-amber-50, #print-root .bg-blue-50, #print-root .bg-blue-100, #print-root .bg-slate-50 {
+    background: #f9fafb !important; border: .5pt solid #9ca3af !important;
+  }
+  #print-root [class*="border-2"] { border-width: .8pt !important; }
+  #print-root .two-col { gap: 10px; }
+  #print-root .space-y-5 > * + * { margin-top: 10px; }
+  #print-root .grid { display: grid; }
+
+  /* signatures */
+  #print-root .pr-sign { display: flex; justify-content: space-between; margin-top: 44px; font-size: 9pt; page-break-inside: avoid; }
+  #print-root .pr-sign div { width: 29%; border-top: .8pt solid #111827; padding-top: 4px; text-align: center; }
+  #print-root .pr-foot { margin-top: 14px; font-size: 7.5pt; color: #6b7280; text-align: center; }
+}
