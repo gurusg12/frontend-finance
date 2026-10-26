@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api', timeout: 15000 });
+// const baseURL = 'https://backend-finance-ad27.onrender.com/api'
+
+const api = axios.create({ baseURL: 'https://backend-finance-ad27.onrender.com/api', timeout: 15000 });
 
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('fs_token');

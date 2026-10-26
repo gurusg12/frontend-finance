@@ -14,8 +14,7 @@ function useAsync(fn, deps) {
     setState(s => ({ ...s, loading: true }));
     fn().then(d => live && setState({ data: d, loading: false, error: null }))
         .catch(e => live && setState({ data: null, loading: false, error: e }));
-    return () => { live = false; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     return () => { live = false; };
   }, deps);
   return state;
 }
